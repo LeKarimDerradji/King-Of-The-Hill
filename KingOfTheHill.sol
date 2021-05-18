@@ -76,6 +76,13 @@ contract KingOfTheHill is AccessControl {
             _tax = 10;
        }
        
+       
+    /**
+     * @dev
+     * We should implement some events here : who is winning, when, what ammount.
+     */
+     
+       
     /**
      *@dev
      * This function serves to see the remaining blocks before the end of the turn, it's like a clock tic-tacking before 
@@ -83,6 +90,10 @@ contract KingOfTheHill is AccessControl {
      */
     function remainingBlock() public view returns (uint256) {
         return _endOfTurn - block.number;
+    }
+    
+    function kingPriceBalance() public view returns (uint256) {
+        return _kingPriceBalance[_kingOfTheHill];
     }
     
     /**
