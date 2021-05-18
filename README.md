@@ -3,7 +3,9 @@
  ![alt text](https://image.freepik.com/vecteurs-libre/pixel-art-king-crown-icon-bit-jeu_360488-117.jpg)
 
  
- ## The King Of The Hill is usually a game that is played in the world of Hacking. 
+ ## The King Of The Hill 
+ 
+ Is usually a game that is played in the world of Hacking. 
  
  To see who is better at hacking a given system, you set one up with some flaws in it, intentionnaly. 
  
@@ -16,4 +18,14 @@
  
  [King Of The Ether](https://www.kingoftheether.com/thrones/kingoftheether/index.html)
  
+ ## How to play : 
+ 
+### Initiatilization : 
+ 
+When the contract is deployed, the deployer sets the owner of the smart-contract (usually himself) and the number of blocks 
+_starting from the current one where the contract is deployed_ to set the length (in blocks) of a turn. 
+
+He also initialize the game with a bid called _seed_. The ammount must be superior to 0 gwei. 
+
+After that, each one _but the owner of the game_ can place a bid on ti
  /// Todo continue 
