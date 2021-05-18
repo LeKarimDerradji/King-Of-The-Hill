@@ -4,9 +4,22 @@ pragma solidity ^0.8.0;
 
 /**
  * @title King Of The Hill
- * @dev Deposit money at the first block, thus becoming the Owner of the smart contract
- * if a given user deposit the double of the ammount deposited by the Owner, before a given number of Blocks
- * he becomes the King Of The Hill. 
+ * @notice
+ * 
+ * The deployer of the smart contract, set up an owner, the number of of blocks before the end of a turn, 
+ * and a seed bid. Then, each user after him/her have to place a bid that is twice as high as the inital bid.
+ * 
+ * The one that mange to do so, claim the crown, and become the King of THe Hill. 
+ * 
+ * The King of The Hill is dethrone, if someone places a bid twice as high as his latest bid. 
+ * 
+ * The owner can't play. The King can place a bid over himself. 
+ * 
+ * At the end of the turn (number of blocks wise), the king can claim his price. 
+ * Doing so, he resets the game. 
+ * 
+ * 10% of the price is for the Owner. 80% is for the King. 10% remaining serves as a new seed. 
+ * Now the turn automatically last 8 turns.
  * 
  * “Concentrate on material gains. Whatever your opponent gives you take, unless you see a good reason not to.”
  * ― Bobby Fischer
@@ -22,7 +35,12 @@ contract KingOfTheHill is AccessControl {
     
     using Address for address payable;
     
-    // To keep track of the king's balance, we made that mapping. 
+    /**
+     * @dev
+     * It is better to track the balance of the king, as a way to give to caesar what belongs to caesar, and avoid rentrancy attack.
+     * This way, the King of each turn can claim their price, as oppose to a loosing player paying for the gas fees for his transaction. 
+     * 
+     */
     mapping(address => uint256) private _kingPriceBalance;
     /**
      * @dev
@@ -100,7 +118,7 @@ contract KingOfTheHill is AccessControl {
     } 
     
     /**
-     * @Dev 
+     * @dev 
      * The second most important function of that game.
      * When the block.numbers of the current turn ended, the game froze, until the king retrives his sendValue
      * when she retrive her price, the price is reduced by 80% and stored into a new variable,
@@ -114,7 +132,7 @@ contract KingOfTheHill is AccessControl {
      */
     
     function claimPrice() public payable onlyKing {
-         require(block.number > _endOfTurn, 'King Of The Hill: you can not withdraw yet.');
+         require(block.number >= _endOfTurn, 'King Of The Hill: you can not withdraw yet.');
          uint256 kingLastPrice = (80 * _price) / 100;
          _price -= kingLastPrice;
          _ownerProfit = (_price * _tax) / 100;
