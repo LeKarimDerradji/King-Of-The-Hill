@@ -1,5 +1,8 @@
 ﻿# 👑 King-Of-The-Hill 👑
  
+ ![alt text](https://image.freepik.com/vecteurs-libre/pixel-art-king-crown-icon-bit-jeu_360488-117.jpg)
+
+ 
  The King Of The Hill is usually a game that is played in the world of Hacking. 
  
  To see who is better at hacking a given system, you set one up with some flaws in it, intentionnaly. 
