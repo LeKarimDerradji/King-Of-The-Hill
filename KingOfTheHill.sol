@@ -99,6 +99,20 @@ contract KingOfTheHill is AccessControl {
          
     } 
     
+    /**
+     * @Dev 
+     * The second most important function of that game.
+     * When the block.numbers of the current turn ended, the game froze, until the king retrives his sendValue
+     * when she retrive her price, the price is reduced by 80% and stored into a new variable,
+     * then we take the remaining, and store it to the owner profit variable to send it to him. 
+     * finally, we set the balance of the king to zero
+     * the price is now ready for the next turn
+     * we send the profit to the owner
+     * we send the price to the King
+     * we reset the adress of the King
+     * we add a new turn with the _endOfTurn variable + the current block number + 8.
+     */
+    
     function claimPrice() public payable onlyKing {
          require(block.number > _endOfTurn, 'King Of The Hill: you can not withdraw yet.');
          uint256 kingLastPrice = (80 * _price) / 100;
