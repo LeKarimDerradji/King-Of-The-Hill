@@ -68,15 +68,13 @@ contract KingOfTheHill is AccessControl {
     
     uint256 private _tax;
     
-    /**
+     /**
      * @notice
-     * This is our constructor, it takes two paramettersn, an owner, and the number of blocks from the time of the deployment that
-     * the game will run until the only public accessible function of this game will be frozen. 
-     * this constructor, respond to the one in AccessControl.sol in order to set up an owner, AccessControl is the file
-     * where we manage all the roles and modifiers, functions, related to these roles. 
-     * finally, we make that constructor payable, in order to place an inital bid, the one that will put that inital bid can not play again,
-     * we'll see that later. The seed value of the bid must be above 0 eth, then, after the first turn of the game, 
-     * the value will reset itself depending of the price of the king at the end of a turn (10%)
+     * The constructor takes two parameters, one requirement, one two modifiers, and sets up to three variables.
+     * The deployer can set the owner of the smart contract, and the number of block before the end of the first turn.
+     * To initialize the game, the deployer have to deploy to smart contract by storing more than 0 eth into it. 
+     * The tax will always be 10% 
+     * The end of one turn will always be block.number + the number of block the deployer chooses. 
      */
     constructor(address owner_, uint256 endOfTurn_) payable AccessControl(owner_)  {
             require(msg.value > 0, 'KingOfTheHill: the seed value must be superior to one eth');
@@ -96,7 +94,8 @@ contract KingOfTheHill is AccessControl {
     /**
      * @dev
      * 
-     * This is the main and most important functionality of this game, to claim the crown
+     * This is the main and most important functionality of this game, 
+     * to claim the crown
      * by claiming the crown, we mean, of course, placing the highest bid, 
      * you can only place twice as much as the latest bid place, this is controlled by the modifier 
      * 'costs' that is located in AccessControl, why did I choose to do so ? 
