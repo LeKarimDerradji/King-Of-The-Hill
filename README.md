@@ -14,6 +14,6 @@
  On a Blockchain, the game was slightly different, a smart contract was deployed, and the one who placed the highest bid, became the King.
  The one that placed a bid higher than the last one, now have the crown on his head, before a richer person dared to place a bid. 
  
- [! King Of The Ether]https://www.kingoftheether.com/thrones/kingoftheether/index.html
+ [King Of The Ether](https://www.kingoftheether.com/thrones/kingoftheether/index.html)
  
  /// Todo continue 
