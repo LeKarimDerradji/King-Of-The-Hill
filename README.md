@@ -46,4 +46,7 @@ When he does :
 - 10% is for the new price. 
 
 
-###Problematic : 
+## Disclaimer : 
+
+**DO NOT** copy that smart contract and deploy it on the mainnet. 
+I am not **RESPONSIBLE** for any loss of money with the missuse of that smart contract. 
