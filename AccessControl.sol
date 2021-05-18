@@ -21,9 +21,15 @@ contract AccessControl {
             require(msg.sender == _owner, "Ownable: Only owner can call this function");
              _;
         }
-        
+        // modifier for the King
         modifier onlyKing() {
             require(msg.sender == _kingOfTheHill, 'AccessControl: Only the kingOfTheHill can call this function.');
+            _;
+        }
+        
+        modifier onlyPlayer() {
+            require(msg.sender != _owner, 'KingOfTheHill: The owner can not play.');
+            require(msg.sender != _kingOfTheHill, 'KingOfTheHill: The king can not claim the crown again.');
             _;
         }
         

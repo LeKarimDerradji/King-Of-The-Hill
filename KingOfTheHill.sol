@@ -44,13 +44,6 @@ contract KingOfTheHill is AccessControl {
     mapping(address => uint256) private _kingPriceBalance;
     /**
      * @dev
-     * This mapping keep tracks of who is the last king, because, why would you be able to gamble again, if you won all of the money of others
-     * it's revelant, if there's millions of player, but in a tiny circle of player, you'll be a whale, and win again and again, 
-     * so i removed this flaw by excluding the last winner each time, by flagging them with a boolean.
-     */
-    mapping(address => bool) private _lastKing; 
-    /**
-     * @dev
      * The first one is a variable keep track of the blocknumber, it will store the block.number where our game will end and no more
      * bids can be placed anymore.
      */
@@ -68,7 +61,7 @@ contract KingOfTheHill is AccessControl {
     
     uint256 private _tax;
     
-     /**
+    /**
      * @notice
      * The constructor takes two parameters, one requirement, one two modifiers, and sets up to three variables.
      * The deployer can set the owner of the smart contract, and the number of block before the end of the first turn.
@@ -82,6 +75,7 @@ contract KingOfTheHill is AccessControl {
             _endOfTurn = block.number + endOfTurn_;
             _tax = 10;
        }
+       
     /**
      *@dev
      * This function serves to see the remaining blocks before the end of the turn, it's like a clock tic-tacking before 
@@ -94,8 +88,7 @@ contract KingOfTheHill is AccessControl {
     /**
      * @dev
      * 
-     * This is the main and most important functionality of this game, 
-     * to claim the crown
+     * This is the main and most important functionality of this game, to claim the crown
      * by claiming the crown, we mean, of course, placing the highest bid, 
      * you can only place twice as much as the latest bid place, this is controlled by the modifier 
      * 'costs' that is located in AccessControl, why did I choose to do so ? 
@@ -106,9 +99,7 @@ contract KingOfTheHill is AccessControl {
      * Then, we assign the value sent to the variable price, the sender becomes the king, and we be track of his balance with the mapping.
      * 
      **/
-    function claimCrown() external payable costs(_price * 2) {
-        require(msg.sender != _owner, 'KingOfTheHill: The owner can not play.');
-        require(msg.sender != _kingOfTheHill, 'KingOfTheHill: The king can not claim the crown again.');
+    function claimCrown() external payable costs(_price * 2) onlyPlayer {
         require(_endOfTurn > block.number, 'KingOfTheHill: the turn ended, wait for the king to withdraw his price.');
          _price += msg.value;
          _kingOfTheHill = msg.sender;
@@ -140,7 +131,6 @@ contract KingOfTheHill is AccessControl {
          payable(_owner).sendValue(_ownerProfit);
          payable(_kingOfTheHill).sendValue(kingLastPrice);
          _kingOfTheHill = address(0);
-         _lastKing[msg.sender] = true;
          _endOfTurn = block.number + 8;
     }
     
