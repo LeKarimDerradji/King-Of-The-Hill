@@ -1,6 +1,8 @@
 ﻿# 👑 King-Of-The-Hill 👑
  
- Teacher Is : Sofiane Akermoun / AbsoluteVirtueXI
+ Teacher Is : Sofiane Akermoun / @AbsoluteVirtueXI
+ 
+ Correction is at : https://github.com/AbsoluteVirtueXI/blockchain-courses/blob/master/exercices/ethereum/correction-exercices-king-of-the-hill/KingOfTheHill.sol
  
  ![alt text](https://image.freepik.com/vecteurs-libre/pixel-art-king-crown-icon-bit-jeu_360488-117.jpg)
 
